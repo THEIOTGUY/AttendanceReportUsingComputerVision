@@ -33,10 +33,10 @@ data = pickle.loads(open(encodingsP, "rb").read())
 
 
 # loop over frames from the video file stream
-while True:
+def facerecog(a):
   # grab the frame from the threaded video stream and resize it
   # to 500px (to speedup processing)
-  frame = cv2.imread('/home/kali/Desktop/modi7.jpg')
+  frame = cv2.imread(a)
   frame = imutils.resize(frame, width=500)
   # Detect the fce boxes
   boxes = face_recognition.face_locations(frame)
@@ -72,11 +72,7 @@ while True:
           name = max(counts, key=counts.get)
 
           #If someone in your dataset is identified, print their name on the screen
-          if currentname != name:
-              currentname = name
-
-
-
+          currentname = name
       # update the list of names
       names.append(name)
 
@@ -88,21 +84,46 @@ while True:
       y = top - 15 if top - 15 > 15 else top + 15
       cv2.putText(frame, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX,
           .8, (0, 255, 255), 2)
-      if name=="Unknown":
-         print(name) 
-      if name!="Unknown":
-         print(name)
+      #if name=="Unknown":
+         #print(name) 
+      #if name!="Unknown":
+         #print(name)
   # display the image to our screen
   #cv2.imshow("Facial Recognition is Running", frame)
   key = cv2.waitKey(1) & 0xFF
-  # quit when 'q' key is pressed
-  if key == ord("q"):
-      break
-  break
+  return name
+a=input('enter image file path : ')
+#facerecog(a)
+name=facerecog(a)
   # update the FPS counter
   #fps.update()
 # stop the timer and display FPS information
 #fps.stop()
 # do a bit of cleanup
+print("Prediction: ",name)
+import json
+import os
+filename = 'data.json'
+with open(filename, 'r') as f:
+    data = json.load(f)
+    data['Predictions']='ayush'
+    #print(data['members'][0]['name'])
+    n=0
+    if data['members'][n]['name']==name:
+        print('got on first try')
+        print(data['members'][n])
+    while data['members'][n]['name']!=name:
+        n=n+1
+        if data['members'][n]['name']==name:
+            print(data['members'][n])
+            break
+    #print(data['Predictions'])
+    #data['members'][0]['name'] = 'Ayush' # <--- add `id` value.
+os.remove(filename)
+with open(filename, 'w') as f:
+    json.dump(data, f, indent=4)
+
 cv2.destroyAllWindows()
+
+
 
