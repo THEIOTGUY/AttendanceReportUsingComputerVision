@@ -1,0 +1,36 @@
+{
+    "Predictions": "ayush",
+    "members": [
+        {
+            "name": "modi",
+            "DOB": "20/11/2002",
+            "ID": 2534,
+            "gender": "male",
+            "address": "burj khalifa"
+        },
+        {
+            "name": "trump",
+            "DOB": "11/12/13",
+            "ID": 7646,
+            "powers": "hsdasfg"
+        },
+        {
+            "name": "bill_gates",
+            "DOB": "11/12/13",
+            "ID": 7646,
+            "powers": "hsdasfg"
+        },
+        {
+            "name": "musk",
+            "DOB": "11/12/13",
+            "ID": 7646,
+            "powers": "hsdasfg"
+        },
+        {
+            "name": "jack",
+            "DOB": "11/12/13",
+            "ID": 7646,
+            "powers": "hsdasfg"
+        }
+    ]
+}
