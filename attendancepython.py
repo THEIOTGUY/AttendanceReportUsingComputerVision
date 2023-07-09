@@ -1,10 +1,3 @@
-import webbrowser
-new = 2 # open in a new tab, if possible
-
-#open a public URL, in this case, the webbrowser docs
-url = "/home/kali/Desktop/large sample html file download for testing.html"
-webbrowser.open(url,new=new)
-
 from imutils.video import VideoStream
 from imutils.video import FPS
 import face_recognition
@@ -12,15 +5,20 @@ import imutils
 import pickle
 import time
 import cv2
-import sys
 import os
 import time
+import webbrowser
+new = 2 # open in a new tab, if possible
+
+#open a public URL, in this case, the webbrowser docs
+url = "/home/kali/Desktop/index.html"
+webbrowser.open(url,new=new)
 # Fetch the service account key JSON file contents
 # Initialize the app with a service account, granting admin privileges
 #Initialize 'currentname' to trigger only when a new person is identified.
 currentname = "unknown"
 #Determine faces from encodings.pickle file model created from train_model.py
-encodingsP = "/home/kali/Desktop/encodings.pickle"
+encodingsP = "encodings.pickle"
 
 # load the known faces and embeddings along with OpenCV's Haar
 # cascade for face detection
@@ -32,7 +30,7 @@ data = pickle.loads(open(encodingsP, "rb").read())
 # src = 0 : for the build in single web cam, could be your laptop webcam
 # src = 2 : I had to set it to 2 inorder to use the USB webcam attached to my laptop
 #vs = VideoStream(src=2,framerate=10).start()
-# start the FPS counter
+
 
 # loop over frames from the video file stream
 while True:
@@ -91,25 +89,20 @@ while True:
       cv2.putText(frame, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX,
           .8, (0, 255, 255), 2)
       if name=="Unknown":
-          speakUNKNOWN()
-          print(name)
+         print(name) 
       if name!="Unknown":
-          speak()
-          print(name)
+         print(name)
   # display the image to our screen
-  cv2.imshow("Facial Recognition is Running", frame)
+  #cv2.imshow("Facial Recognition is Running", frame)
   key = cv2.waitKey(1) & 0xFF
   # quit when 'q' key is pressed
   if key == ord("q"):
       break
-
+  break
   # update the FPS counter
-  fps.update()
+  #fps.update()
 # stop the timer and display FPS information
-fps.stop()
-print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
-print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
-
+#fps.stop()
 # do a bit of cleanup
 cv2.destroyAllWindows()
-vs.stop()
+
